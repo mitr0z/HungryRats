@@ -4,18 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0910" />
-  <meta
-    name="description"
-    content="HungryRats — navigateur desktop expérimental, personnalisable, local-first et orienté confidentialité."
-  />
+  <meta name="description" content="HungryRats — navigateur desktop expérimental, personnalisable, local-first et orienté confidentialité." />
   <title>HungryRats — Hungry for the web.</title>
 
   <style>
     :root {
       --bg: #09080d;
-      --bg-soft: #0f0c15;
       --panel: rgba(20, 15, 30, 0.82);
-      --panel-2: rgba(255, 255, 255, 0.025);
       --text: #f6f2fb;
       --muted: #aaa3b4;
       --muted-2: #77717f;
@@ -30,13 +25,9 @@
       --shadow: 0 22px 70px rgba(82, 32, 140, 0.22);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -88,7 +79,7 @@
       z-index: 50;
       backdrop-filter: blur(18px);
       background: rgba(9, 8, 13, 0.72);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .nav-inner {
@@ -115,14 +106,11 @@
       display: grid;
       place-items: center;
       border: 1px solid var(--border);
-      background: linear-gradient(145deg, rgba(166, 92, 255, 0.18), rgba(85, 43, 129, 0.07));
-      color: var(--purple-soft);
-      box-shadow: inset 0 0 20px rgba(166, 92, 255, 0.05);
+      background: linear-gradient(145deg, rgba(166,92,255,0.18), rgba(85,43,129,0.07));
+      box-shadow: inset 0 0 20px rgba(166,92,255,0.05);
     }
 
-    .brand b {
-      color: var(--purple);
-    }
+    .brand b { color: var(--purple); }
 
     .nav-links {
       display: flex;
@@ -134,13 +122,13 @@
       color: var(--muted);
       padding: 9px 12px;
       border-radius: 10px;
-      font-size: 0.94rem;
+      font-size: .94rem;
       transition: 160ms ease;
     }
 
     .nav-link:hover {
-      color: white;
-      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      background: rgba(255,255,255,.04);
     }
 
     .btn {
@@ -153,33 +141,31 @@
       gap: 9px;
       border: 1px solid var(--border);
       font-weight: 700;
-      font-size: 0.94rem;
+      font-size: .94rem;
       transition: 170ms ease;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-    }
+    .btn:hover { transform: translateY(-1px); }
 
     .btn-primary {
       color: #fff;
       background: linear-gradient(135deg, var(--purple-2), var(--purple));
-      border-color: rgba(219, 177, 255, 0.34);
-      box-shadow: 0 12px 32px rgba(115, 54, 185, 0.25);
+      border-color: rgba(219,177,255,.34);
+      box-shadow: 0 12px 32px rgba(115,54,185,.25);
     }
 
     .btn-primary:hover {
       filter: brightness(1.08);
-      box-shadow: 0 15px 38px rgba(115, 54, 185, 0.32);
+      box-shadow: 0 15px 38px rgba(115,54,185,.32);
     }
 
     .btn-ghost {
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255,255,255,.02);
       color: #ece4f3;
     }
 
     .btn-ghost:hover {
-      background: rgba(166, 92, 255, 0.055);
+      background: rgba(166,92,255,.055);
       border-color: var(--border-strong);
     }
 
@@ -192,7 +178,7 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.04fr 0.96fr;
+      grid-template-columns: 1.04fr .96fr;
       gap: 64px;
       align-items: center;
     }
@@ -203,12 +189,12 @@
       gap: 9px;
       padding: 7px 11px;
       border-radius: 999px;
-      background: rgba(166, 92, 255, 0.06);
-      border: 1px solid rgba(181, 121, 255, 0.15);
+      background: rgba(166,92,255,.06);
+      border: 1px solid rgba(181,121,255,.15);
       color: #d4b6ff;
-      font-size: 0.71rem;
+      font-size: .71rem;
       font-weight: 800;
-      letter-spacing: 0.16em;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
 
@@ -225,13 +211,13 @@
       margin: 22px 0 18px;
       max-width: 760px;
       font-size: clamp(3.2rem, 7vw, 6.2rem);
-      line-height: 0.92;
-      letter-spacing: -0.065em;
+      line-height: .92;
+      letter-spacing: -.065em;
     }
 
     .accent {
       color: var(--purple);
-      text-shadow: 0 0 35px rgba(166, 92, 255, 0.12);
+      text-shadow: 0 0 35px rgba(166,92,255,.12);
     }
 
     .hero p {
@@ -252,25 +238,17 @@
     .hero-note {
       margin-top: 17px;
       color: var(--muted-2);
-      font-size: 0.84rem;
+      font-size: .84rem;
     }
 
     .browser-card {
       overflow: hidden;
       position: relative;
       border-radius: 24px;
-      border: 1px solid rgba(190, 132, 255, 0.18);
-      background: linear-gradient(180deg, rgba(20, 16, 29, 0.97), rgba(11, 10, 16, 0.97));
+      border: 1px solid rgba(190,132,255,.18);
+      background: linear-gradient(180deg, rgba(20,16,29,.97), rgba(11,10,16,.97));
       box-shadow: var(--shadow);
       transform: perspective(1000px) rotateY(-2deg) rotateX(1deg);
-    }
-
-    .browser-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
     }
 
     .browser-top {
@@ -279,7 +257,7 @@
       align-items: center;
       gap: 7px;
       padding: 0 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255,255,255,.05);
     }
 
     .dot {
@@ -297,10 +275,10 @@
       display: flex;
       align-items: center;
       border-radius: 9px;
-      background: rgba(166, 92, 255, 0.05);
-      border: 1px solid rgba(181, 121, 255, 0.12);
+      background: rgba(166,92,255,.05);
+      border: 1px solid rgba(181,121,255,.12);
       color: #cec4d8;
-      font-size: 0.75rem;
+      font-size: .75rem;
     }
 
     .browser-body {
@@ -318,11 +296,10 @@
       display: grid;
       place-items: center;
       border-radius: 20px;
-      border: 1px solid rgba(188, 128, 255, 0.22);
-      background: rgba(166, 92, 255, 0.07);
-      color: #b77cff;
+      border: 1px solid rgba(188,128,255,.22);
+      background: rgba(166,92,255,.07);
       font-size: 2rem;
-      box-shadow: 0 14px 50px rgba(104, 48, 169, 0.17);
+      box-shadow: 0 14px 50px rgba(104,48,169,.17);
     }
 
     .browser-title {
@@ -330,14 +307,14 @@
       margin: 16px 0 5px;
       font-size: 2rem;
       font-weight: 800;
-      letter-spacing: -0.04em;
+      letter-spacing: -.04em;
     }
 
     .browser-sub {
       text-align: center;
       color: #b5a9c2;
-      font-size: 0.77rem;
-      letter-spacing: 0.12em;
+      font-size: .77rem;
+      letter-spacing: .12em;
     }
 
     .search-box {
@@ -348,10 +325,10 @@
       display: flex;
       align-items: center;
       border-radius: 14px;
-      border: 1px solid rgba(188, 128, 255, 0.22);
-      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(188,128,255,.22);
+      background: rgba(255,255,255,.025);
       color: #8f8599;
-      box-shadow: 0 10px 35px rgba(89, 39, 143, 0.11);
+      box-shadow: 0 10px 35px rgba(89,39,143,.11);
     }
 
     .search-icon {
@@ -362,7 +339,7 @@
 
     .fake-placeholder {
       flex: 1;
-      font-size: 0.86rem;
+      font-size: .86rem;
     }
 
     .search-arrow {
@@ -376,9 +353,7 @@
       font-weight: 800;
     }
 
-    section {
-      padding: 82px 0;
-    }
+    section { padding: 82px 0; }
 
     .section-heading {
       max-width: 760px;
@@ -388,7 +363,7 @@
     .section-heading h2 {
       margin: 11px 0 13px;
       font-size: clamp(2rem, 4vw, 3.2rem);
-      letter-spacing: -0.045em;
+      letter-spacing: -.045em;
     }
 
     .section-heading p {
@@ -407,15 +382,15 @@
       min-height: 210px;
       padding: 24px;
       border-radius: var(--radius);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,.06);
+      background: linear-gradient(180deg, rgba(255,255,255,.028), rgba(255,255,255,.015));
       transition: 180ms ease;
     }
 
     .feature:hover {
       transform: translateY(-3px);
       border-color: var(--border-strong);
-      background: linear-gradient(180deg, rgba(166, 92, 255, 0.055), rgba(255,255,255,0.018));
+      background: linear-gradient(180deg, rgba(166,92,255,.055), rgba(255,255,255,.018));
     }
 
     .feature-icon {
@@ -426,8 +401,8 @@
       place-items: center;
       border-radius: 12px;
       color: var(--purple-soft);
-      background: rgba(166, 92, 255, 0.08);
-      border: 1px solid rgba(178, 111, 255, 0.16);
+      background: rgba(166,92,255,.08);
+      border: 1px solid rgba(178,111,255,.16);
     }
 
     .feature h3 {
@@ -438,7 +413,7 @@
     .feature p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: .92rem;
       line-height: 1.65;
     }
 
@@ -446,21 +421,20 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 24px;
-      align-items: stretch;
     }
 
     .privacy-copy,
     .status-card {
       padding: 30px;
       border-radius: 22px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.02);
     }
 
     .privacy-copy h2 {
       margin-top: 0;
       font-size: clamp(2rem, 4vw, 3.2rem);
-      letter-spacing: -0.045em;
+      letter-spacing: -.045em;
     }
 
     .privacy-copy p {
@@ -474,32 +448,49 @@
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+      border-bottom: 1px solid rgba(255,255,255,.055);
     }
 
-    .status-row:last-child {
-      border-bottom: 0;
-    }
+    .status-row:last-child { border-bottom: 0; }
 
-    .status-name {
-      font-weight: 700;
-    }
+    .status-name { font-weight: 700; }
 
     .status-meta {
       margin-top: 4px;
       color: var(--muted);
-      font-size: 0.86rem;
+      font-size: .86rem;
     }
 
     .pill {
       padding: 6px 9px;
       border-radius: 999px;
-      background: rgba(143, 232, 184, 0.08);
-      border: 1px solid rgba(143, 232, 184, 0.14);
+      background: rgba(143,232,184,.08);
+      border: 1px solid rgba(143,232,184,.14);
       color: var(--success);
-      font-size: 0.74rem;
+      font-size: .74rem;
       font-weight: 800;
       white-space: nowrap;
+    }
+
+    .download-card {
+      margin-top: 30px;
+      padding: 24px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(166,92,255,.035);
+    }
+
+    .download-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .download-card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.6;
     }
 
     .roadmap {
@@ -511,27 +502,27 @@
     .roadmap-item {
       padding: 20px;
       border-radius: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.055);
-      background: rgba(255, 255, 255, 0.018);
+      border: 1px solid rgba(255,255,255,.055);
+      background: rgba(255,255,255,.018);
     }
 
     .roadmap-item small {
       color: #be8bf7;
-      font-size: 0.72rem;
+      font-size: .72rem;
       font-weight: 800;
-      letter-spacing: 0.12em;
+      letter-spacing: .12em;
       text-transform: uppercase;
     }
 
     .roadmap-item h3 {
       margin: 10px 0 7px;
-      font-size: 0.98rem;
+      font-size: .98rem;
     }
 
     .roadmap-item p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.84rem;
+      font-size: .84rem;
       line-height: 1.55;
     }
 
@@ -543,17 +534,17 @@
       padding: 48px 28px;
       text-align: center;
       border-radius: 26px;
-      border: 1px solid rgba(183, 118, 255, 0.19);
+      border: 1px solid rgba(183,118,255,.19);
       background:
-        radial-gradient(circle at 50% 0%, rgba(143, 66, 224, 0.13), transparent 55%),
-        rgba(255, 255, 255, 0.018);
-      box-shadow: 0 22px 70px rgba(88, 36, 143, 0.17);
+        radial-gradient(circle at 50% 0%, rgba(143,66,224,.13), transparent 55%),
+        rgba(255,255,255,.018);
+      box-shadow: 0 22px 70px rgba(88,36,143,.17);
     }
 
     .cta-box h2 {
       margin: 0 0 12px;
       font-size: clamp(2rem, 5vw, 3.6rem);
-      letter-spacing: -0.05em;
+      letter-spacing: -.05em;
     }
 
     .cta-box p {
@@ -565,9 +556,9 @@
 
     footer {
       padding: 28px 0 34px;
-      border-top: 1px solid rgba(255, 255, 255, 0.055);
+      border-top: 1px solid rgba(255,255,255,.055);
       color: var(--muted-2);
-      font-size: 0.84rem;
+      font-size: .84rem;
     }
 
     .footer-inner {
@@ -583,44 +574,23 @@
         grid-template-columns: 1fr;
       }
 
-      .browser-card {
-        transform: none;
-      }
-
-      .features {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .roadmap {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .nav-link.optional {
-        display: none;
-      }
+      .browser-card { transform: none; }
+      .features { grid-template-columns: repeat(2, 1fr); }
+      .roadmap { grid-template-columns: repeat(2, 1fr); }
+      .nav-link.optional { display: none; }
     }
 
     @media (max-width: 640px) {
-      .container {
-        width: min(calc(100% - 24px), var(--max));
-      }
-
-      .nav-inner {
-        height: 64px;
-      }
-
-      .nav-links .nav-link {
-        display: none;
-      }
+      .container { width: min(calc(100% - 24px), var(--max)); }
+      .nav-inner { height: 64px; }
+      .nav-links .nav-link { display: none; }
 
       .hero {
         min-height: auto;
         padding: 66px 0 40px;
       }
 
-      h1 {
-        font-size: clamp(3rem, 17vw, 4.6rem);
-      }
+      h1 { font-size: clamp(3rem, 17vw, 4.6rem); }
 
       .features,
       .roadmap {
@@ -636,13 +606,8 @@
         flex-direction: column;
       }
 
-      .btn {
-        width: 100%;
-      }
-
-      section {
-        padding: 64px 0;
-      }
+      .btn { width: 100%; }
+      section { padding: 64px 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -650,8 +615,8 @@
       *::before,
       *::after {
         scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
       }
     }
   </style>
@@ -669,8 +634,8 @@
         <a class="nav-link optional" href="#features">Fonctions</a>
         <a class="nav-link optional" href="#privacy">Confidentialité</a>
         <a class="nav-link optional" href="#roadmap">Roadmap</a>
-        <a class="btn btn-ghost" href="https://github.com/YOUR_USERNAME/HungryRats" target="_blank" rel="noreferrer">
-          GitHub ↗
+        <a class="btn btn-primary" href="https://mega.nz/file/aogXBTQa#g7S0IVtbR6fUc1cyx0vv_ftSGY-a8MyYvAm9U-5Xxhk" target="_blank" rel="noopener noreferrer">
+          Télécharger
         </a>
       </div>
     </div>
@@ -685,14 +650,13 @@
           <h1>Hungry<span class="accent">Rats</span></h1>
 
           <p>
-            Un navigateur desktop expérimental construit autour d'une idée simple :
-            une interface que tu peux vraiment personnaliser, des outils de confidentialité
-            transparents et une IA locale qui reste sur ta machine.
+            Un navigateur desktop expérimental pensé pour être personnalisable,
+            moderne, local-first et transparent sur la confidentialité.
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://github.com/YOUR_USERNAME/HungryRats/releases" target="_blank" rel="noreferrer">
-              Télécharger HungryRats
+            <a class="btn btn-primary" href="https://mega.nz/file/aogXBTQa#g7S0IVtbR6fUc1cyx0vv_ftSGY-a8MyYvAm9U-5Xxhk" target="_blank" rel="noopener noreferrer">
+              Télécharger HungryRats pour Windows
             </a>
 
             <a class="btn btn-ghost" href="#features">
@@ -705,7 +669,7 @@
           </div>
         </div>
 
-        <div class="browser-card" aria-label="Aperçu stylisé de HungryRats">
+        <div class="browser-card">
           <div class="browser-top">
             <span class="dot"></span>
             <span class="dot"></span>
@@ -732,10 +696,10 @@
       <div class="container">
         <div class="section-heading">
           <span class="eyebrow">Fonctions</span>
-          <h2>Pas juste un skin Chromium.</h2>
+          <h2>Plus qu'un simple habillage Chromium.</h2>
           <p>
-            HungryRats cherche à réunir personnalisation, recherche, IA locale et outils
-            de navigation modernes dans une seule expérience cohérente.
+            HungryRats réunit recherche, IA locale, personnalisation et outils de confidentialité
+            dans une expérience cohérente en noir et violet.
           </p>
         </div>
 
@@ -743,37 +707,37 @@
           <article class="feature">
             <div class="feature-icon">⌕</div>
             <h3>HungryRats Search</h3>
-            <p>Une page de résultats personnalisée, pensée pour ne pas ressembler à une simple redirection Google.</p>
+            <p>Une page de résultats personnalisée intégrée directement au navigateur.</p>
           </article>
 
           <article class="feature">
             <div class="feature-icon">✦</div>
             <h3>IA locale</h3>
-            <p>Assistant via Ollama pour résumer, expliquer, traduire et répondre à partir du contenu de la page.</p>
+            <p>Assistant via Ollama pour résumer, expliquer et interagir avec les pages.</p>
           </article>
 
           <article class="feature">
             <div class="feature-icon">◈</div>
             <h3>HungryRats Shield</h3>
-            <p>Blocage publicitaire et anti-tracking intégré au navigateur avec exceptions par site.</p>
+            <p>Blocage publicitaire, anti-tracking et exceptions par site intégrés.</p>
           </article>
 
           <article class="feature">
             <div class="feature-icon">◎</div>
             <h3>Cookie Protection</h3>
-            <p>Modes de protection, gestion des cookies tiers et contrôle des données de site.</p>
+            <p>Protection contre les cookies tiers et contrôle des données de site.</p>
           </article>
 
           <article class="feature">
             <div class="feature-icon">▦</div>
             <h3>Onglets avancés</h3>
-            <p>Pin, duplication, recherche, groupes, mute et restauration des onglets récemment fermés.</p>
+            <p>Pin, duplication, groupes, recherche, mute et restauration d'onglets.</p>
           </article>
 
           <article class="feature">
             <div class="feature-icon">◐</div>
             <h3>Personnalisation</h3>
-            <p>Thèmes, wallpapers locaux, transparence, blur et une identité noir/violet propre à HungryRats.</p>
+            <p>Thèmes, wallpapers locaux, transparence, blur et identité noir/violet.</p>
           </article>
         </div>
       </div>
@@ -783,16 +747,29 @@
       <div class="container privacy-block">
         <div class="privacy-copy">
           <span class="eyebrow">Local-first</span>
-          <h2>La confidentialité doit être compréhensible.</h2>
+          <h2>Une confidentialité claire.</h2>
+
           <p>
-            HungryRats vise une approche transparente : les protections doivent indiquer
-            ce qu'elles font réellement, sans slogans du type « 100 % anonyme ».
+            HungryRats vise une approche transparente : expliquer ce qui est bloqué,
+            ce qui reste local et ce que chaque protection fait réellement.
           </p>
+
           <p>
-            Les fonctions locales comme l'IA peuvent tourner sur la machine de l'utilisateur.
-            Le projet est encore en développement, donc certaines briques peuvent demander
-            une configuration locale avant une distribution publique simplifiée.
+            Les fonctions locales comme HungryRats AI peuvent fonctionner directement
+            sur l'ordinateur de l'utilisateur avec Ollama.
           </p>
+
+          <div class="download-card">
+            <strong>Télécharger HungryRats</strong>
+            <p>
+              La version Windows actuelle est hébergée sur MEGA.
+              Le projet étant encore en développement, certaines fonctions locales peuvent
+              demander une configuration supplémentaire.
+            </p>
+            <a class="btn btn-primary" href="https://mega.nz/file/aogXBTQa#g7S0IVtbR6fUc1cyx0vv_ftSGY-a8MyYvAm9U-5Xxhk" target="_blank" rel="noopener noreferrer">
+              Ouvrir le téléchargement ↗
+            </a>
+          </div>
         </div>
 
         <div class="status-card">
@@ -837,34 +814,34 @@
           <span class="eyebrow">Roadmap</span>
           <h2>HungryRats continue d'évoluer.</h2>
           <p>
-            Le navigateur est encore un projet en construction. L'objectif est d'ajouter les
-            fonctions progressivement sans sacrifier la stabilité ni l'identité du produit.
+            Le navigateur est encore en construction. Les nouvelles fonctions sont ajoutées
+            progressivement afin de garder une base stable.
           </p>
         </div>
 
         <div class="roadmap">
           <div class="roadmap-item">
             <small>En cours</small>
-            <h3>Tabs & performance</h3>
-            <p>Sleeping tabs, memory saver et meilleure gestion des nombreuses pages ouvertes.</p>
+            <h3>Performance</h3>
+            <p>Sleeping tabs, Memory Saver et meilleure gestion des nombreuses pages ouvertes.</p>
           </div>
 
           <div class="roadmap-item">
             <small>À venir</small>
             <h3>Vertical Tabs</h3>
-            <p>Une disposition alternative pour les utilisateurs qui gardent beaucoup d'onglets ouverts.</p>
+            <p>Une disposition alternative adaptée aux utilisateurs avec beaucoup d'onglets.</p>
           </div>
 
           <div class="roadmap-item">
             <small>À venir</small>
             <h3>Workspaces</h3>
-            <p>Séparer travail, école, développement et navigation personnelle.</p>
+            <p>Séparer école, développement, navigation personnelle et autres activités.</p>
           </div>
 
           <div class="roadmap-item">
             <small>À venir</small>
             <h3>Public Ready</h3>
-            <p>Installation simplifiée, gestion des dépendances locales et distribution plus accessible.</p>
+            <p>Installation simplifiée et gestion automatique des dépendances locales.</p>
           </div>
         </div>
       </div>
@@ -875,16 +852,12 @@
         <div class="cta-box">
           <h2>Hungry for the web.</h2>
           <p>
-            HungryRats est encore en développement. Tu peux suivre le projet,
-            consulter le code et tester les versions publiées depuis GitHub.
+            Teste la version actuelle de HungryRats sur Windows et suis l'évolution du projet.
           </p>
 
           <div class="hero-actions" style="justify-content:center;">
-            <a class="btn btn-primary" href="https://github.com/YOUR_USERNAME/HungryRats" target="_blank" rel="noreferrer">
-              Voir le repository
-            </a>
-            <a class="btn btn-ghost" href="https://github.com/YOUR_USERNAME/HungryRats/releases" target="_blank" rel="noreferrer">
-              Releases
+            <a class="btn btn-primary" href="https://mega.nz/file/aogXBTQa#g7S0IVtbR6fUc1cyx0vv_ftSGY-a8MyYvAm9U-5Xxhk" target="_blank" rel="noopener noreferrer">
+              Télécharger HungryRats
             </a>
           </div>
         </div>
