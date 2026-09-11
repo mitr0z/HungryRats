@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0910" />
+  <meta
+    name="description"
+    content="HungryRats — navigateur desktop expérimental, personnalisable, local-first et orienté confidentialité."
+  />
+  <title>HungryRats — Hungry for the web.</title>
+
+  <style>
+    :root {
+      --bg: #09080d;
+      --bg-soft: #0f0c15;
+      --panel: rgba(20, 15, 30, 0.82);
+      --panel-2: rgba(255, 255, 255, 0.025);
+      --text: #f6f2fb;
+      --muted: #aaa3b4;
+      --muted-2: #77717f;
+      --purple: #a65cff;
+      --purple-2: #7f3fd1;
+      --purple-soft: #cfb0ff;
+      --border: rgba(181, 121, 255, 0.18);
+      --border-strong: rgba(181, 121, 255, 0.42);
+      --success: #8fe8b8;
+      --max: 1180px;
+      --radius: 18px;
+      --shadow: 0 22px 70px rgba(82, 32, 140, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(136, 60, 216, 0.15), transparent 30%),
+        radial-gradient(circle at 88% 8%, rgba(90, 43, 150, 0.13), transparent 27%),
+        linear-gradient(180deg, #0b0910 0%, #09080d 48%, #07070b 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 520px;
+      height: 520px;
+      border: 1px solid rgba(184, 129, 255, 0.07);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      top: -300px;
+      right: -170px;
+    }
+
+    body::after {
+      left: -360px;
+      bottom: -230px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(calc(100% - 36px), var(--max));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(9, 8, 13, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-inner {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, rgba(166, 92, 255, 0.18), rgba(85, 43, 129, 0.07));
+      color: var(--purple-soft);
+      box-shadow: inset 0 0 20px rgba(166, 92, 255, 0.05);
+    }
+
+    .brand b {
+      color: var(--purple);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 0.94rem;
+      transition: 160ms ease;
+    }
+
+    .nav-link:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .btn {
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid var(--border);
+      font-weight: 700;
+      font-size: 0.94rem;
+      transition: 170ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--purple-2), var(--purple));
+      border-color: rgba(219, 177, 255, 0.34);
+      box-shadow: 0 12px 32px rgba(115, 54, 185, 0.25);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 15px 38px rgba(115, 54, 185, 0.32);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.02);
+      color: #ece4f3;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(166, 92, 255, 0.055);
+      border-color: var(--border-strong);
+    }
+
+    .hero {
+      min-height: 78vh;
+      display: grid;
+      align-items: center;
+      padding: 92px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.04fr 0.96fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(166, 92, 255, 0.06);
+      border: 1px solid rgba(181, 121, 255, 0.15);
+      color: #d4b6ff;
+      font-size: 0.71rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 14px var(--purple);
+    }
+
+    h1 {
+      margin: 22px 0 18px;
+      max-width: 760px;
+      font-size: clamp(3.2rem, 7vw, 6.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.065em;
+    }
+
+    .accent {
+      color: var(--purple);
+      text-shadow: 0 0 35px rgba(166, 92, 255, 0.12);
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 660px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.7vw, 1.18rem);
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-note {
+      margin-top: 17px;
+      color: var(--muted-2);
+      font-size: 0.84rem;
+    }
+
+    .browser-card {
+      overflow: hidden;
+      position: relative;
+      border-radius: 24px;
+      border: 1px solid rgba(190, 132, 255, 0.18);
+      background: linear-gradient(180deg, rgba(20, 16, 29, 0.97), rgba(11, 10, 16, 0.97));
+      box-shadow: var(--shadow);
+      transform: perspective(1000px) rotateY(-2deg) rotateX(1deg);
+    }
+
+    .browser-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+    }
+
+    .browser-top {
+      height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4d4755;
+    }
+
+    .mini-tab {
+      margin-left: 10px;
+      min-width: 150px;
+      height: 30px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      border-radius: 9px;
+      background: rgba(166, 92, 255, 0.05);
+      border: 1px solid rgba(181, 121, 255, 0.12);
+      color: #cec4d8;
+      font-size: 0.75rem;
+    }
+
+    .browser-body {
+      min-height: 390px;
+      padding: 46px 34px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .browser-logo {
+      margin: 0 auto;
+      width: 76px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      border: 1px solid rgba(188, 128, 255, 0.22);
+      background: rgba(166, 92, 255, 0.07);
+      color: #b77cff;
+      font-size: 2rem;
+      box-shadow: 0 14px 50px rgba(104, 48, 169, 0.17);
+    }
+
+    .browser-title {
+      text-align: center;
+      margin: 16px 0 5px;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .browser-sub {
+      text-align: center;
+      color: #b5a9c2;
+      font-size: 0.77rem;
+      letter-spacing: 0.12em;
+    }
+
+    .search-box {
+      margin: 30px auto 0;
+      width: min(100%, 510px);
+      height: 52px;
+      padding: 0 12px 0 16px;
+      display: flex;
+      align-items: center;
+      border-radius: 14px;
+      border: 1px solid rgba(188, 128, 255, 0.22);
+      background: rgba(255, 255, 255, 0.025);
+      color: #8f8599;
+      box-shadow: 0 10px 35px rgba(89, 39, 143, 0.11);
+    }
+
+    .search-icon {
+      margin-right: 11px;
+      color: var(--purple);
+      font-size: 1.08rem;
+    }
+
+    .fake-placeholder {
+      flex: 1;
+      font-size: 0.86rem;
+    }
+
+    .search-arrow {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #7e42b9, #995de0);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    section {
+      padding: 82px 0;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .section-heading h2 {
+      margin: 11px 0 13px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -0.045em;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .feature {
+      min-height: 210px;
+      padding: 24px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.015));
+      transition: 180ms ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+      background: linear-gradient(180deg, rgba(166, 92, 255, 0.055), rgba(255,255,255,0.018));
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--purple-soft);
+      background: rgba(166, 92, 255, 0.08);
+      border: 1px solid rgba(178, 111, 255, 0.16);
+    }
+
+    .feature h3 {
+      margin: 0 0 9px;
+      font-size: 1.05rem;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .privacy-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .privacy-copy,
+    .status-card {
+      padding: 30px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .privacy-copy h2 {
+      margin-top: 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -0.045em;
+    }
+
+    .privacy-copy p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .status-row {
+      padding: 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+    }
+
+    .status-row:last-child {
+      border-bottom: 0;
+    }
+
+    .status-name {
+      font-weight: 700;
+    }
+
+    .status-meta {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .pill {
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(143, 232, 184, 0.08);
+      border: 1px solid rgba(143, 232, 184, 0.14);
+      color: var(--success);
+      font-size: 0.74rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .roadmap-item {
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.055);
+      background: rgba(255, 255, 255, 0.018);
+    }
+
+    .roadmap-item small {
+      color: #be8bf7;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .roadmap-item h3 {
+      margin: 10px 0 7px;
+      font-size: 0.98rem;
+    }
+
+    .roadmap-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .cta {
+      padding: 76px 0 100px;
+    }
+
+    .cta-box {
+      padding: 48px 28px;
+      text-align: center;
+      border-radius: 26px;
+      border: 1px solid rgba(183, 118, 255, 0.19);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(143, 66, 224, 0.13), transparent 55%),
+        rgba(255, 255, 255, 0.018);
+      box-shadow: 0 22px 70px rgba(88, 36, 143, 0.17);
+    }
+
+    .cta-box h2 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      letter-spacing: -0.05em;
+    }
+
+    .cta-box p {
+      max-width: 660px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    footer {
+      padding: 28px 0 34px;
+      border-top: 1px solid rgba(255, 255, 255, 0.055);
+      color: var(--muted-2);
+      font-size: 0.84rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .privacy-block {
+        grid-template-columns: 1fr;
+      }
+
+      .browser-card {
+        transform: none;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .roadmap {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-link.optional {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(calc(100% - 24px), var(--max));
+      }
+
+      .nav-inner {
+        height: 64px;
+      }
+
+      .nav-links .nav-link {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 66px 0 40px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 17vw, 4.6rem);
+      }
+
+      .features,
+      .roadmap {
+        grid-template-columns: 1fr;
+      }
+
+      .browser-body {
+        min-height: 330px;
+        padding-inline: 18px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      section {
+        padding: 64px 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="HungryRats">
+        <span class="brand-mark">🐭</span>
+        <span>Hungry<b>Rats</b></span>
+      </a>
+
+      <div class="nav-links">
+        <a class="nav-link optional" href="#features">Fonctions</a>
+        <a class="nav-link optional" href="#privacy">Confidentialité</a>
+        <a class="nav-link optional" href="#roadmap">Roadmap</a>
+        <a class="btn btn-ghost" href="https://github.com/YOUR_USERNAME/HungryRats" target="_blank" rel="noreferrer">
+          GitHub ↗
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Votre terrain d'exploration</span>
+
+          <h1>Hungry<span class="accent">Rats</span></h1>
+
+          <p>
+            Un navigateur desktop expérimental construit autour d'une idée simple :
+            une interface que tu peux vraiment personnaliser, des outils de confidentialité
+            transparents et une IA locale qui reste sur ta machine.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://github.com/YOUR_USERNAME/HungryRats/releases" target="_blank" rel="noreferrer">
+              Télécharger HungryRats
+            </a>
+
+            <a class="btn btn-ghost" href="#features">
+              Découvrir le projet ↓
+            </a>
+          </div>
+
+          <div class="hero-note">
+            Projet en développement actif • Windows • Electron / Chromium
+          </div>
+        </div>
+
+        <div class="browser-card" aria-label="Aperçu stylisé de HungryRats">
+          <div class="browser-top">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <div class="mini-tab">🐭 &nbsp; Nouvel onglet</div>
+          </div>
+
+          <div class="browser-body">
+            <div class="browser-logo">🐭</div>
+            <div class="browser-title">Hungry<span class="accent">Rats</span></div>
+            <div class="browser-sub">HUNGRY FOR THE WEB.</div>
+
+            <div class="search-box">
+              <span class="search-icon">⌕</span>
+              <span class="fake-placeholder">Une idée. Une adresse. Tout le web.</span>
+              <span class="search-arrow">↗</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Fonctions</span>
+          <h2>Pas juste un skin Chromium.</h2>
+          <p>
+            HungryRats cherche à réunir personnalisation, recherche, IA locale et outils
+            de navigation modernes dans une seule expérience cohérente.
+          </p>
+        </div>
+
+        <div class="features">
+          <article class="feature">
+            <div class="feature-icon">⌕</div>
+            <h3>HungryRats Search</h3>
+            <p>Une page de résultats personnalisée, pensée pour ne pas ressembler à une simple redirection Google.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">✦</div>
+            <h3>IA locale</h3>
+            <p>Assistant via Ollama pour résumer, expliquer, traduire et répondre à partir du contenu de la page.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">◈</div>
+            <h3>HungryRats Shield</h3>
+            <p>Blocage publicitaire et anti-tracking intégré au navigateur avec exceptions par site.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">◎</div>
+            <h3>Cookie Protection</h3>
+            <p>Modes de protection, gestion des cookies tiers et contrôle des données de site.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">▦</div>
+            <h3>Onglets avancés</h3>
+            <p>Pin, duplication, recherche, groupes, mute et restauration des onglets récemment fermés.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">◐</div>
+            <h3>Personnalisation</h3>
+            <p>Thèmes, wallpapers locaux, transparence, blur et une identité noir/violet propre à HungryRats.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <div class="container privacy-block">
+        <div class="privacy-copy">
+          <span class="eyebrow">Local-first</span>
+          <h2>La confidentialité doit être compréhensible.</h2>
+          <p>
+            HungryRats vise une approche transparente : les protections doivent indiquer
+            ce qu'elles font réellement, sans slogans du type « 100 % anonyme ».
+          </p>
+          <p>
+            Les fonctions locales comme l'IA peuvent tourner sur la machine de l'utilisateur.
+            Le projet est encore en développement, donc certaines briques peuvent demander
+            une configuration locale avant une distribution publique simplifiée.
+          </p>
+        </div>
+
+        <div class="status-card">
+          <div class="status-row">
+            <div>
+              <div class="status-name">HungryRats Shield</div>
+              <div class="status-meta">Ads + trackers</div>
+            </div>
+            <span class="pill">INTÉGRÉ</span>
+          </div>
+
+          <div class="status-row">
+            <div>
+              <div class="status-name">Cookie Protection</div>
+              <div class="status-meta">Protection cross-site</div>
+            </div>
+            <span class="pill">INTÉGRÉ</span>
+          </div>
+
+          <div class="status-row">
+            <div>
+              <div class="status-name">HungryRats AI</div>
+              <div class="status-meta">Ollama / modèle local</div>
+            </div>
+            <span class="pill">LOCAL</span>
+          </div>
+
+          <div class="status-row">
+            <div>
+              <div class="status-name">Privacy Dashboard</div>
+              <div class="status-meta">État des protections</div>
+            </div>
+            <span class="pill">INTÉGRÉ</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Roadmap</span>
+          <h2>HungryRats continue d'évoluer.</h2>
+          <p>
+            Le navigateur est encore un projet en construction. L'objectif est d'ajouter les
+            fonctions progressivement sans sacrifier la stabilité ni l'identité du produit.
+          </p>
+        </div>
+
+        <div class="roadmap">
+          <div class="roadmap-item">
+            <small>En cours</small>
+            <h3>Tabs & performance</h3>
+            <p>Sleeping tabs, memory saver et meilleure gestion des nombreuses pages ouvertes.</p>
+          </div>
+
+          <div class="roadmap-item">
+            <small>À venir</small>
+            <h3>Vertical Tabs</h3>
+            <p>Une disposition alternative pour les utilisateurs qui gardent beaucoup d'onglets ouverts.</p>
+          </div>
+
+          <div class="roadmap-item">
+            <small>À venir</small>
+            <h3>Workspaces</h3>
+            <p>Séparer travail, école, développement et navigation personnelle.</p>
+          </div>
+
+          <div class="roadmap-item">
+            <small>À venir</small>
+            <h3>Public Ready</h3>
+            <p>Installation simplifiée, gestion des dépendances locales et distribution plus accessible.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Hungry for the web.</h2>
+          <p>
+            HungryRats est encore en développement. Tu peux suivre le projet,
+            consulter le code et tester les versions publiées depuis GitHub.
+          </p>
+
+          <div class="hero-actions" style="justify-content:center;">
+            <a class="btn btn-primary" href="https://github.com/YOUR_USERNAME/HungryRats" target="_blank" rel="noreferrer">
+              Voir le repository
+            </a>
+            <a class="btn btn-ghost" href="https://github.com/YOUR_USERNAME/HungryRats/releases" target="_blank" rel="noreferrer">
+              Releases
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> HungryRats.</span>
+      <span>Built with Electron / Chromium • Hungry for the web.</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
